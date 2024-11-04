@@ -1,0 +1,33 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: Roboto, sans-serif;
+    background: rgb(228, 249, 255);
+    background: radial-gradient(
+        circle,
+        rgba(228, 249, 255, 1) 0%,
+        rgba(242, 252, 255, 1) 35%
+    );
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(168, 194, 201);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #000;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0f4758;
+}
