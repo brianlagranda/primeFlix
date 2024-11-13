@@ -9,7 +9,11 @@ import DetailedMedia from './components/DetailedMedia';
 
 function App() {
     return (
-        <BrowserRouter>
+        <BrowserRouter
+            future={{
+                v7_startTransition: true,
+            }}
+        >
             <div className="h-full select-none">
                 <Header />
 
