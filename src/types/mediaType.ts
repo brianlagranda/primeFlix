@@ -16,44 +16,36 @@ type Genre = {
     name: string;
 };
 
+type BaseMedia = {
+    backdrop_path: string;
+    genre_ids: number[];
+    id: number;
+    original_language: string;
+    overview: string;
+    popularity: number;
+    poster_path: string;
+    vote_average: number;
+    vote_count: number;
+    imgURL: string;
+    genres?: Genre[];
+};
+
+export type Movie = BaseMedia & {
+    original_title: string;
+    release_date: string;
+    title: string;
+    video: boolean;
+};
+
+export type TVShow = BaseMedia & {
+    origin_country: string[];
+    original_name: string;
+    first_air_date: string;
+    name: string;
+};
+
 export type MinimalMedia = {
     id: number;
     title: string;
     poster_path: string;
-};
-
-export type Movie = {
-    backdrop_path: string;
-    genre_ids: number[];
-    id: number;
-    original_language: string;
-    original_title: string;
-    overview: string;
-    popularity: number;
-    poster_path: string;
-    release_date: string;
-    title: string;
-    video: boolean;
-    vote_average: number;
-    vote_count: number;
-    imgURL: string;
-    genres?: Genre[];
-};
-
-export type TVShow = {
-    backdrop_path: string;
-    genre_ids: number[];
-    id: number;
-    origin_country: string[];
-    original_language: string;
-    original_name: string;
-    overview: string;
-    popularity: number;
-    poster_path: string;
-    first_air_date: string;
-    name: string;
-    vote_average: number;
-    vote_count: number;
-    imgURL: string;
-    genres?: Genre[];
 };
