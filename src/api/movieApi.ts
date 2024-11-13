@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { Media, Movie, TVShow } from '../types/mediaType';
+import { Media } from '../types/mediaType';
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const apiBaseURL = 'https://api.themoviedb.org/3';
@@ -30,43 +30,24 @@ const fetchData = async <T>(
     }
 };
 
-export const fetchMoviesByQuery = async (
+export const fetchByQuery = async (
+    type: 'movie' | 'tv',
     searchQuery: string,
     page: number = 1,
-): Promise<Movie[]> => {
-    const data = await fetchData<{ results: Movie[] }>('search/movie', {
+): Promise<Media[]> => {
+    const data = await fetchData<{ results: Media[] }>(`search/${type}`, {
         query: searchQuery,
         page,
     });
     return data.results;
 };
 
-export const fetchMoviesByDiscovery = async (
+export const fetchByDiscovery = async (
+    type: 'movie' | 'tv',
     page: number = 1,
-): Promise<Movie[]> => {
-    const data = await fetchData<{ results: Movie[] }>('discover/movie', {
-        page,
-    });
-    return data.results;
-};
-
-export const fetchSeriesByQuery = async (
-    searchQuery: string,
-    page: number = 1,
-): Promise<TVShow[]> => {
-    const data = await fetchData<{ results: TVShow[] }>('search/tv', {
-        query: searchQuery,
-        page,
-    });
-    return data.results;
-};
-
-export const fetchSeriesByDiscovery = async (
-    page: number = 1,
-): Promise<TVShow[]> => {
-    const data = await fetchData<{ results: TVShow[] }>('discover/tv', {
-        page,
-    });
+): Promise<Media[]> => {
+    const endpoint = `discover/${type}`;
+    const data = await fetchData<{ results: Media[] }>(endpoint, { page });
     return data.results;
 };
 
@@ -75,8 +56,8 @@ export const fetchBothByQuery = async (
     page: number = 1,
 ): Promise<Media[]> => {
     const [movies, series] = await Promise.all([
-        fetchMoviesByQuery(searchQuery, page),
-        fetchSeriesByQuery(searchQuery, page),
+        fetchByQuery('movie', searchQuery, page),
+        fetchByQuery('tv', searchQuery, page),
     ]);
     return [...movies, ...series];
 };
@@ -85,8 +66,8 @@ export const fetchBothByDiscovery = async (
     page: number = 1,
 ): Promise<Media[]> => {
     const [movies, series] = await Promise.all([
-        fetchMoviesByDiscovery(page),
-        fetchSeriesByDiscovery(page),
+        fetchByDiscovery('movie', page),
+        fetchByDiscovery('tv', page),
     ]);
     return [...movies, ...series];
 };
