@@ -7,12 +7,12 @@ import './index.css';
 
 async function enableMocking() {
     if (process.env.NODE_ENV !== 'development') {
-        return
+        return;
     }
 
-    const { worker } = await import('./mocks/browser.ts')
+    const { worker } = await import('./mocks/browser.ts');
 
-    return worker.start()
+    return worker.start();
 }
 
 enableMocking().then(() => {
@@ -23,4 +23,4 @@ enableMocking().then(() => {
             </Provider>
         </React.StrictMode>,
     );
-})
+});
