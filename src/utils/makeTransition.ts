@@ -1,15 +1,15 @@
-import { flushSync } from "react-dom";
+import { flushSync } from 'react-dom';
 
 function makeTransition(transition: () => void) {
-  if (document.startViewTransition) {
-    document.startViewTransition(() => {
-      flushSync(() => {
+    if (document.startViewTransition) {
+        document.startViewTransition(() => {
+            flushSync(() => {
+                transition();
+            });
+        });
+    } else {
         transition();
-      });
-    });
-  } else {
-    transition();
-  }
+    }
 }
 
-export default makeTransition
+export default makeTransition;
