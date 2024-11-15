@@ -14,11 +14,7 @@ const MediaList = () => {
     const page = useSelector((state: RootState) => state.search.page);
     const Token = sessionStorage.getItem('token');
 
-    const {
-        data: moviesList,
-        loading,
-        error,
-    } = useFetchMedia('language=es-ES', '', page);
+    const { data: moviesList, loading, error } = useFetchMedia('', page);
 
     if (!Token) return <Navigate to="/" />;
 

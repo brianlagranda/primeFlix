@@ -21,7 +21,7 @@ const Results = () => {
         data: contentList,
         loading,
         error,
-    } = useFetchMedia('language=es-ES', searchKeyword, page);
+    } = useFetchMedia(searchKeyword, page);
 
     if (!Token || !keyword) return <Navigate to="/" />;
 

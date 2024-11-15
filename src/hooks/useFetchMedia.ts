@@ -1,14 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-
 import { filterDuplicates } from '../utils/filterHelpers';
-
 import {
-    fetchMoviesByQuery,
-    fetchSeriesByQuery,
+    fetchByQuery,
     fetchBothByQuery,
-    fetchMoviesByDiscovery,
-    fetchSeriesByDiscovery,
+    fetchByDiscovery,
     fetchBothByDiscovery,
 } from '../api/movieApi';
 
@@ -19,22 +15,27 @@ import { Media } from '../types/mediaType';
 
 const MySwal = withReactContent(Swal);
 
-export const useFetchMedia = (
-    queryParams: string,
-    searchQuery: string,
-    page: number,
-) => {
+type MediaType = 'movie' | 'tv' | 'all';
+
+const isValidMediaType = (type: string): type is MediaType =>
+    type === 'movie' || type === 'tv' || type === 'all';
+
+export const useFetchMedia = (searchQuery: string, page: number) => {
     const [data, setData] = useState<Media[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<null | string>(null);
-    const [prevMediaType, setPrevMediaType] = useState<string>('');
-    const [mediaType, setMediaType] = useState<string>('');
+    const [mediaType, setMediaType] = useState<MediaType>('all');
     const location = useLocation();
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
-        const type = searchParams.get('content') || 'movie';
-        setMediaType(type);
+        const type = searchParams.get('content') || 'all';
+        if (isValidMediaType(type)) {
+            setMediaType(type);
+        } else {
+            console.warn(`Invalid media type: ${type}`);
+            setMediaType('movie');
+        }
     }, [location.search]);
 
     useEffect(() => {
@@ -43,31 +44,17 @@ export const useFetchMedia = (
                 setLoading(true);
                 setError(null);
 
-                let fetchedData: Media[] = [];
+                setData([]);
 
-                if (searchQuery) {
-                    fetchedData = await fetchContentBasedOnQuery(
-                        searchQuery,
-                        queryParams,
-                        page,
-                        mediaType,
-                    );
-                } else {
-                    fetchedData = await fetchContentByDiscovery(
-                        queryParams,
-                        page,
-                        mediaType,
-                    );
-                }
+                const fetchedData = await fetchContent(
+                    searchQuery,
+                    page,
+                    mediaType,
+                );
 
-                const filteredResults = filterDuplicates(data, fetchedData);
+                const newResults = filterDuplicates([], fetchedData);
 
-                if (mediaType !== prevMediaType || searchQuery) {
-                    setData(filteredResults);
-                    setPrevMediaType(mediaType);
-                } else {
-                    setData((prevData) => [...prevData, ...filteredResults]);
-                }
+                setData(newResults);
             } catch (e) {
                 handleError(e as Error);
             } finally {
@@ -76,37 +63,24 @@ export const useFetchMedia = (
         };
 
         fetchData();
-    }, [mediaType, queryParams, page, searchQuery]);
+    }, [mediaType, page, searchQuery]);
 
     return { data, loading, error };
 };
 
-const fetchContentBasedOnQuery = async (
+const fetchContent = async (
     searchQuery: string,
-    queryParams: string,
     page: number,
-    mediaType: string,
+    mediaType: MediaType,
 ): Promise<Media[]> => {
-    if (mediaType === 'movie') {
-        return await fetchMoviesByQuery(searchQuery, queryParams, page);
-    } else if (mediaType === 'tv') {
-        return await fetchSeriesByQuery(searchQuery, queryParams, page);
+    if (searchQuery) {
+        return mediaType === 'all'
+            ? fetchBothByQuery(searchQuery, page)
+            : fetchByQuery(mediaType, searchQuery, page);
     } else {
-        return await fetchBothByQuery(searchQuery, queryParams, page);
-    }
-};
-
-const fetchContentByDiscovery = async (
-    queryParams: string,
-    page: number,
-    mediaType: string,
-): Promise<Media[]> => {
-    if (mediaType === 'movie') {
-        return await fetchMoviesByDiscovery(queryParams, page);
-    } else if (mediaType === 'tv') {
-        return await fetchSeriesByDiscovery(queryParams, page);
-    } else {
-        return await fetchBothByDiscovery(queryParams, page);
+        return mediaType === 'all'
+            ? fetchBothByDiscovery(page)
+            : fetchByDiscovery(mediaType, page);
     }
 };
 

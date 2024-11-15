@@ -21,7 +21,10 @@ const fetchData = async <T>(
 ): Promise<T> => {
     try {
         const response = await apiClient.get<T>(endpoint, {
-            params: queryParams,
+            params: {
+                ...queryParams,
+                language: 'es-ES',
+            },
         });
         return response.data;
     } catch (error) {
