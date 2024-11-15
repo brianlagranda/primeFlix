@@ -8,7 +8,7 @@ export interface MediaGridProps {
     mediaList: Media[];
     loading: boolean;
     error: string | null;
-    onLoadMore: () => void;
+    onLoadMore: (() => void) | undefined;
 }
 
 type Genre = {

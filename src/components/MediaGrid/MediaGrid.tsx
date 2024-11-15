@@ -37,7 +37,7 @@ const MediaGrid: React.FC<MediaGridProps> = ({
                             {loading ? (
                                 <LoadingSpinner data-testid="loading-spinner" />
                             ) : (
-                                pathname !== '/favourites' && (
+                                onLoadMore && (
                                     <LoadMoreButton
                                         onClick={onLoadMore}
                                         buttonTitle="Load More"
