@@ -14,7 +14,7 @@ const Header = () => {
     const dispatch = useDispatch();
 
     const navItems = [
-        { label: 'Inicio', path: '/mediaList?content=movies-and-series' },
+        { label: 'Inicio', path: '/mediaList?content=all' },
         { label: 'Películas', path: '/mediaList?content=movie' },
         { label: 'Series', path: '/mediaList?content=tv' },
         { label: 'Favoritos', path: '/favourites' },

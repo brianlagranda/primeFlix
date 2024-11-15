@@ -13,8 +13,8 @@ import { resetPage } from '../features/search/searchSlice';
 
 const DetailedMedia = () => {
     const Token = sessionStorage.getItem('token');
-    const navigate = useNavigate();
     const location = useLocation();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const searchParams = new URLSearchParams(location.search);
