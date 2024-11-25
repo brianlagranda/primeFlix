@@ -1,13 +1,13 @@
 import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from '../app/store';
+import { RootState } from '@/app/store';
 
-import { incrementPage } from '../features/search/searchSlice';
+import { incrementPage } from '@/features/search/searchSlice';
 
-import MediaGrid from './MediaGrid/MediaGrid';
+import MediaGrid from './MediaGrid';
 
-import { useFetchMedia } from '../hooks/useFetchMedia';
+import { useFetchMedia } from '@/hooks/useFetchMedia';
 
 const MediaList = () => {
     const dispatch = useDispatch();

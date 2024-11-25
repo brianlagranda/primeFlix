@@ -1,4 +1,4 @@
-import { Media } from '../types/mediaType';
+import { Media } from '@/types/mediaType';
 
 export const mockMovie: Media = {
     id: 1,

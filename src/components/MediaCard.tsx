@@ -8,15 +8,15 @@ import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
 import {
     addFavourite,
     removeFavourite,
-} from '../../features/favourites/favouritesSlice';
+} from '@/features/favourites/favouritesSlice';
 
-import { RootState } from '../../app/store';
+import { RootState } from '@/app/store';
 
-import imageNotFound from '../../assets/NoImageFound.png';
+import imageNotFound from '@/assets/NoImageFound.png';
 
-import makeTransition from '../../utils/makeTransition';
+import makeTransition from '@/utils/makeTransition';
 
-import { Media, MediaCardProps, Movie } from '../../types/mediaType';
+import { Media, MediaCardProps, Movie } from '@/types/mediaType';
 
 const MediaCard: React.FC<MediaCardProps> = ({ media }) => {
     const isMovie = (media: Media): media is Movie => {

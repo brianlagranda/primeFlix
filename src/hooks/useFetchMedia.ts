@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { filterDuplicates } from '../utils/filterHelpers';
+import { filterDuplicates } from '@/utils/filterHelpers';
 import {
     fetchByQuery,
     fetchBothByQuery,
     fetchByDiscovery,
     fetchBothByDiscovery,
-} from '../api/movieApi';
+} from '../api/mediaApi';
 
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-import { Media } from '../types/mediaType';
+import { Media } from '@/types/mediaType';
 
 const MySwal = withReactContent(Swal);
 

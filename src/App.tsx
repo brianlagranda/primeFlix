@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import MediaList from './components/MediaList';
-import Login from './components/Login';
-import Results from './components/Results';
-import SearchBar from './components/SearchBar';
-import Favourites from './components/Favourites';
-import DetailedMedia from './components/DetailedMedia';
+import Header from '@/components/Header';
+import MediaList from '@/components/MediaList';
+import Login from '@/components/Login';
+import Results from '@/components/Results';
+import SearchBar from '@/components/SearchBar';
+import Favourites from '@/components/Favourites';
+import DetailedMedia from '@/components/DetailedMedia';
 
 function App() {
     return (

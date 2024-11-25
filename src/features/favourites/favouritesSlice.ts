@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Media } from '../../types/mediaType';
+import { Media } from '@/types/mediaType';
 
 export type FavouritesState = {
     favourites: Media[];

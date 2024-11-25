@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { RootState } from '../app/store';
+import { RootState } from '@/app/store';
 
-import { clearToken } from '../features/auth/authSlice';
-import { resetPage } from '../features/search/searchSlice';
+import { clearToken } from '@/features/auth/authSlice';
+import { resetPage } from '@/features/search/searchSlice';
 
-import makeTransition from '../utils/makeTransition';
+import makeTransition from '@/utils/makeTransition';
 
 const Header = () => {
     const token = useSelector((state: RootState) => state.auth.token);

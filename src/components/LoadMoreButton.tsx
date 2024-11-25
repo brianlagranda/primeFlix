@@ -1,4 +1,4 @@
-import { buttonProps } from '../../types/buttonType';
+import { buttonProps } from '@/types/buttonType';
 
 const LoadMoreButton: React.FC<buttonProps> = ({ onClick, buttonTitle }) => {
     return (

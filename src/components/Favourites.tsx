@@ -2,8 +2,8 @@ import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 
-import { RootState } from '../app/store';
-import MediaGrid from './MediaGrid/MediaGrid';
+import { RootState } from '@/app/store';
+import MediaGrid from './MediaGrid';
 
 const Favourites = () => {
     const Token = sessionStorage.getItem('token');

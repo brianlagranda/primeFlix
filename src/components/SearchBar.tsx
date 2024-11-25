@@ -2,12 +2,11 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { resetPage, setKeyword } from '../features/search/searchSlice';
+import { resetPage, setKeyword } from '@/features/search/searchSlice';
+import makeTransition from '@/utils/makeTransition';
 
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-
-import makeTransition from '../utils/makeTransition';
 
 const MySwal = withReactContent(Swal);
 

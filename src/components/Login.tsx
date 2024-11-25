@@ -1,16 +1,14 @@
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import Axios from 'axios';
-
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-import { setToken } from '../features/auth/authSlice';
+import { setToken } from '@/features/auth/authSlice';
 
-import makeTransition from '../utils/makeTransition';
+import makeTransition from '@/utils/makeTransition';
 
-import { LoginProps } from '../types/loginType';
+import { LoginProps } from '@/types/loginType';
 
 const Login: React.FC<LoginProps> = () => {
     const MySwal = withReactContent(Swal);
@@ -44,7 +42,7 @@ const Login: React.FC<LoginProps> = () => {
             return;
         }
 
-        if (email !== 'challenge@alkemy.org' || password !== 'react') {
+        if (email !== 'test@test.com' || password !== 'test') {
             MySwal.fire({
                 title: 'Credenciales inválidas.',
                 icon: 'error',
@@ -52,16 +50,16 @@ const Login: React.FC<LoginProps> = () => {
             return;
         }
 
-        Axios.post('http://challenge-react.alkemy.org', {
-            email,
-            password,
-        }).then((res) => {
-            const tokenData = res.data.token;
-            sessionStorage.setItem('token', tokenData);
-            dispatch(setToken(tokenData));
-            makeTransition(() => {
-                navigate('/mediaList');
-            });
+        const array = new Uint8Array(32);
+        window.crypto.getRandomValues(array);
+        const tokenData = Array.from(array, (byte) =>
+            byte.toString(16).padStart(2, '0'),
+        ).join('');
+
+        sessionStorage.setItem('token', tokenData);
+        dispatch(setToken(tokenData));
+        makeTransition(() => {
+            navigate('/mediaList');
         });
     };
 

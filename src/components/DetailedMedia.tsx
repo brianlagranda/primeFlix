@@ -5,11 +5,11 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LoadingSpinner from './LoadingSpinner';
 
-import genreColors from '../utils/genreColors';
-import makeTransition from '../utils/makeTransition';
+import genreColors from '@/utils/genreColors';
+import makeTransition from '@/utils/makeTransition';
 
-import { useFetchSingleMedia } from '../hooks/useFetchSingleMedia';
-import { resetPage } from '../features/search/searchSlice';
+import { useFetchSingleMedia } from '@/hooks/useFetchSingleMedia';
+import { resetPage } from '@/features/search/searchSlice';
 
 const DetailedMedia = () => {
     const Token = sessionStorage.getItem('token');
@@ -20,8 +20,8 @@ const DetailedMedia = () => {
     const searchParams = new URLSearchParams(location.search);
     const mediaID = searchParams.get('mediaID');
 
-    const isMoviePath = searchParams.get('content');
-    const mediaType = isMoviePath ? 'movie' : 'tv';
+    const mediaPath = searchParams.get('content');
+    const mediaType = mediaPath || 'movie';
 
     const {
         data: media,

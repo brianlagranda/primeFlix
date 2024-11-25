@@ -1,8 +1,8 @@
-import MediaCard from '../MediaCard/MediaCard';
-import LoadMoreButton from '../LoadMoreButton/LoadMoreButton';
-import LoadingSpinner from '../LoadingSpinner';
+import MediaCard from './MediaCard';
+import LoadMoreButton from './LoadMoreButton';
+import LoadingSpinner from './LoadingSpinner';
 
-import { MediaGridProps } from '../../types/mediaType';
+import { MediaGridProps } from '@/types/mediaType';
 import { useLocation } from 'react-router-dom';
 
 const MediaGrid: React.FC<MediaGridProps> = ({
