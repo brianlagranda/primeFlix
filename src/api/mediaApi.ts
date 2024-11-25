@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { Media } from '../types/mediaType';
+import { Media } from '@/types/mediaType';
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const apiBaseURL = 'https://api.themoviedb.org/3';
