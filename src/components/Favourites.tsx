@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { RootState } from '@/app/store';
 import MediaGrid from './MediaGrid';
@@ -11,13 +11,7 @@ const Favourites = () => {
         (state: RootState) => state.favourite.favourites,
     );
 
-    const [visibleCount, setVisibleCount] = useState(
-        Math.min(favourites.length, 20),
-    );
-
-    useEffect(() => {
-        setVisibleCount(Math.min(favourites.length, 20));
-    }, [favourites]);
+    const [visibleCount, setVisibleCount] = useState(20);
 
     if (!Token) return <Navigate to="/" />;
 
@@ -27,11 +21,12 @@ const Favourites = () => {
         );
     };
 
+    const visibleFavourites = favourites.slice(0, visibleCount);
     const hasMoreItems = visibleCount < favourites.length;
 
     return (
         <MediaGrid
-            mediaList={favourites.slice(0, visibleCount)}
+            mediaList={visibleFavourites}
             loading={false}
             error={null}
             onLoadMore={hasMoreItems ? handleLoadMore : undefined}
