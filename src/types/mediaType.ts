@@ -11,6 +11,11 @@ export interface MediaGridProps {
     onLoadMore: (() => void) | undefined;
 }
 
+export interface MediaCarouselProps {
+    sectionTitle: string;
+    fetchFunction: () => Promise<Media[]>;
+}
+
 type Genre = {
     id: number;
     name: string;

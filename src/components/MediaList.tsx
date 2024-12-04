@@ -1,30 +1,27 @@
 import { Navigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { RootState } from '@/app/store';
-
-import { incrementPage } from '@/features/search/searchSlice';
-
-import MediaGrid from './MediaGrid';
-
-import { useFetchMedia } from '@/hooks/useFetchMedia';
+import MediaCarousel from './MediaCarousel';
+import { fetchByDiscovery, fetchBothByDiscovery } from '@/api/mediaApi';
 
 const MediaList = () => {
-    const dispatch = useDispatch();
-    const page = useSelector((state: RootState) => state.search.page);
     const Token = sessionStorage.getItem('token');
-
-    const { data: moviesList, loading, error } = useFetchMedia('', page);
 
     if (!Token) return <Navigate to="/" />;
 
     return (
-        <MediaGrid
-            mediaList={moviesList}
-            loading={loading}
-            error={error}
-            onLoadMore={() => dispatch(incrementPage())}
-        />
+        <div className="space-y-8 p-4">
+            <MediaCarousel
+                sectionTitle="Popular Movies"
+                fetchFunction={() => fetchByDiscovery('movie')}
+            />
+            <MediaCarousel
+                sectionTitle="Popular TV Shows"
+                fetchFunction={() => fetchByDiscovery('tv')}
+            />
+            <MediaCarousel
+                sectionTitle="Discover All"
+                fetchFunction={fetchBothByDiscovery}
+            />
+        </div>
     );
 };
 

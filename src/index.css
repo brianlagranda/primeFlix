@@ -4,16 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global CSS */
 body {
     font-family: Roboto, sans-serif;
-    background: rgb(228, 249, 255);
-    background: radial-gradient(
-        circle,
-        rgba(228, 249, 255, 1) 0%,
-        rgba(242, 252, 255, 1) 35%
-    );
+    color: #eeeeee;
+    background: radial-gradient(circle, #141414 0%, #191919 100%);
 }
 
+/* Custom ScrollBar */
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -29,4 +27,23 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #0f4758;
+}
+
+/* Custom CSS */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-snap-type {
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 24px;
+}
+
+.scrollbar-snap-align {
+    scroll-snap-align: start;
 }
