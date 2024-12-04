@@ -1,4 +1,5 @@
 const withMT = require('@material-tailwind/react/utils/withMT');
+const aspectRatio = require('@tailwindcss/aspect-ratio');
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -21,5 +22,5 @@ export default {
             },
         },
     },
-    plugins: [withMT],
+    plugins: [withMT, aspectRatio],
 };
